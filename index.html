@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!--
+  ============================================================
+  STUDENT TEMPLATE — FLUTTER / MOBILE DEVELOPER PORTFOLIO
+  ============================================================
+  HOW TO USE THIS FILE:
+  1. Press Ctrl+F (or Cmd+F) and search for the eight-star marker:  ********
+     Every spot you're expected to edit has a comment with ******** right above it.
+  2. Each marker comment tells you exactly what to change (name, photo, links, colors, etc).
+  3. Everything else (layout, sections, animations) can stay as-is.
+  ============================================================
+-->
+
+<!-- ******************** EDIT: PAGE TITLE (browser tab text) ******************** -->
+<title>Alex Rivera — Flutter & Mobile App Developer</title>
+
+<meta name="description" content="Portfolio template for a Flutter & Mobile Application Developer." />
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Font Awesome 6 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          /* ******************** EDIT: COLOR PALETTE ********************
+             Change these hex values to re-theme the ENTIRE site.
+             base    = darkest background corner
+             purple1 = mid-tone background purple
+             purple2 = bright background purple (top-right glow)
+             accent  = main accent color (buttons, headings, icons)
+             accent2 = secondary accent (soft lavender text/glow)
+             --------------------------------------------------------- */
+          base:    '#0a0714',
+          purple1: '#1e1240',
+          purple2: '#5b21b6',
+          accent:  '#8b5cf6',
+          accent2: '#c4b5fd',
+          surface: '#150d28',
+          line:    '#2c1f4a',
+        },
+        fontFamily: {
+          display: ['Poppins', 'sans-serif'],
+          body: ['Inter', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'monospace'],
+        },
+      }
+    }
+  }
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { background-color: #0a0714; }
+  ::selection { background: rgba(139,92,246,0.35); color: #fff; }
+
+  /* Signature background: dark corner fading into purple glow, matches reference */
+  .hero-bg {
+    background:
+      radial-gradient(1100px 600px at 100% 0%, rgba(124,58,237,0.55), transparent 60%),
+      linear-gradient(115deg, #0a0714 0%, #1e1240 45%, #5b21b6 100%);
+  }
+
+  .glass {
+    background: rgba(21, 13, 40, 0.65);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .grad-text {
+    background: linear-gradient(90deg, #a78bfa, #ede9fe);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .card-hover { transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; }
+  .card-hover:hover { transform: translateY(-4px); border-color: rgba(139,92,246,0.5); box-shadow: 0 20px 60px -25px rgba(139,92,246,0.45); }
+
+  .photo-tilt {
+    transform: rotate(4deg);
+    transition: transform .4s ease;
+  }
+  .photo-tilt:hover { transform: rotate(0deg); }
+
+  @keyframes rise { from { opacity:0; transform: translateY(14px);} to { opacity:1; transform: translateY(0);} }
+  .rise { animation: rise .7s ease both; }
+  .rise-d1 { animation-delay: .08s; }
+  .rise-d2 { animation-delay: .16s; }
+  .rise-d3 { animation-delay: .24s; }
+  .rise-d4 { animation-delay: .32s; }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.02em;
+  }
+
+  #mobile-drawer { transition: transform .35s cubic-bezier(.4,0,.2,1); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rise { animation: none !important; }
+  }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid #a78bfa;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  .num-list-item:not(:last-child) { border-bottom: 1px solid #2c1f4a; }
+</style>
+</head>
+
+<body class="bg-base text-slate-300 font-body antialiased">
+
+<!-- ============ NAVBAR ============ -->
+<header class="fixed top-0 inset-x-0 z-50 border-b border-line/70 glass">
+  <nav class="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-2 group">
+      <!-- ******************** EDIT: LOGO MONOGRAM (initials) ******************** -->
+      <span class="w-9 h-9 rounded-lg bg-gradient-to-br from-accent to-accent2 flex items-center justify-center font-display font-bold text-base text-[#0a0714]">AR</span>
+      <!-- ******************** EDIT: NAME IN NAVBAR ******************** -->
+      <span class="font-display font-semibold text-slate-100 tracking-tight hidden sm:block">Alex Rivera<span class="text-accent2">.</span></span>
+    </a>
+
+    <ul class="hidden md:flex items-center gap-8 font-mono text-[13px] text-slate-400">
+      <li><a href="#about" class="hover:text-accent2 transition-colors">01. About</a></li>
+      <li><a href="#services" class="hover:text-accent2 transition-colors">02. Services</a></li>
+      <li><a href="#skills" class="hover:text-accent2 transition-colors">03. Skills</a></li>
+      <li><a href="#projects" class="hover:text-accent2 transition-colors">04. Projects</a></li>
+      <li><a href="#contact" class="hover:text-accent2 transition-colors">05. Contact</a></li>
+    </ul>
+
+    <div class="hidden md:flex items-center gap-3">
+      <!-- ******************** EDIT: GITHUB LINK ******************** -->
+      <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile"
+         class="w-9 h-9 rounded-lg border border-line flex items-center justify-center text-slate-400 hover:text-base hover:bg-accent2 hover:border-accent2 transition-all duration-300">
+        <i class="fa-brands fa-github"></i>
+      </a>
+      <!-- ******************** EDIT: LINKEDIN LINK ******************** -->
+      <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile"
+         class="w-9 h-9 rounded-lg border border-line flex items-center justify-center text-slate-400 hover:text-base hover:bg-accent hover:border-accent transition-all duration-300">
+        <i class="fa-brands fa-linkedin-in"></i>
+      </a>
+    </div>
+
+    <button id="menu-btn" aria-label="Open menu" aria-expanded="false" class="md:hidden w-9 h-9 flex items-center justify-center text-slate-300 border border-line rounded-lg">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </nav>
+
+  <div id="mobile-drawer" class="md:hidden fixed top-0 right-0 h-full w-72 glass border-l border-line translate-x-full">
+    <div class="flex items-center justify-between px-5 h-16 border-b border-line">
+      <span class="font-display font-semibold text-slate-100">Menu</span>
+      <button id="menu-close" aria-label="Close menu" class="w-9 h-9 flex items-center justify-center text-slate-300 border border-line rounded-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <ul class="flex flex-col gap-1 p-5 font-mono text-sm text-slate-300">
+      <li><a data-nav href="#about" class="block py-3 px-2 rounded-lg hover:bg-surface hover:text-accent2 transition-colors">01. About</a></li>
+      <li><a data-nav href="#services" class="block py-3 px-2 rounded-lg hover:bg-surface hover:text-accent2 transition-colors">02. Services</a></li>
+      <li><a data-nav href="#skills" class="block py-3 px-2 rounded-lg hover:bg-surface hover:text-accent2 transition-colors">03. Skills</a></li>
+      <li><a data-nav href="#projects" class="block py-3 px-2 rounded-lg hover:bg-surface hover:text-accent2 transition-colors">04. Projects</a></li>
+      <li><a data-nav href="#contact" class="block py-3 px-2 rounded-lg hover:bg-surface hover:text-accent2 transition-colors">05. Contact</a></li>
+    </ul>
+    <div class="flex items-center gap-3 px-5 pt-2">
+      <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile"
+         class="w-10 h-10 rounded-lg border border-line flex items-center justify-center text-slate-400 hover:text-accent2 hover:border-accent2 transition-colors">
+        <i class="fa-brands fa-github"></i>
+      </a>
+      <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile"
+         class="w-10 h-10 rounded-lg border border-line flex items-center justify-center text-slate-400 hover:text-accent hover:border-accent transition-colors">
+        <i class="fa-brands fa-linkedin-in"></i>
+      </a>
+    </div>
+  </div>
+  <div id="drawer-backdrop" class="md:hidden fixed inset-0 bg-black/60 opacity-0 pointer-events-none transition-opacity duration-300 z-40"></div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="top" class="hero-bg relative pt-40 pb-20 px-5 sm:px-8 overflow-hidden">
+  <div class="max-w-6xl mx-auto grid lg:grid-cols-[1.15fr_0.85fr] gap-16 items-center relative">
+    <div>
+      <!-- ******************** EDIT: YOUR NAME (eyebrow line) ******************** -->
+      <p class="rise font-display font-semibold text-white text-lg sm:text-xl mb-4">I am Alex Rivera</p>
+
+      <!-- ******************** EDIT: HEADLINE / ROLE (two lines) ******************** -->
+      <h1 class="rise rise-d1 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl leading-[1.08]">
+        <span class="grad-text">Flutter Developer</span><br/>
+        <span class="grad-text">Mobile App Builder</span>
+      </h1>
+
+      <!-- ******************** EDIT: SHORT INTRO PARAGRAPH ******************** -->
+      <p class="rise rise-d2 mt-6 text-slate-300/90 text-base sm:text-lg max-w-xl leading-relaxed">
+        I break down complex product problems into clean, cross-platform mobile experiences —
+        built with Flutter, backed by solid state management, and designed to feel effortless.
+      </p>
+
+      <div class="rise rise-d3 mt-8 flex flex-wrap items-center gap-4">
+        <!-- ******************** EDIT: RESUME/CV FILE LINK ******************** -->
+        <a href="#" download class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-line text-slate-100 font-semibold text-sm hover:border-accent2/60 hover:bg-white/5 transition-all duration-300">
+          Download CV <i class="fa-solid fa-arrow-down text-xs"></i>
+        </a>
+        <div class="flex items-center gap-3">
+          <!-- ******************** EDIT: LINKEDIN LINK (hero icon) ******************** -->
+          <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile"
+             class="w-11 h-11 rounded-full border border-accent/40 flex items-center justify-center text-accent2 hover:bg-accent hover:text-white hover:border-accent transition-all duration-300">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+          <!-- ******************** EDIT: GITHUB LINK (hero icon) ******************** -->
+          <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile"
+             class="w-11 h-11 rounded-full border border-accent/40 flex items-center justify-center text-accent2 hover:bg-accent hover:text-white hover:border-accent transition-all duration-300">
+            <i class="fa-brands fa-github"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile photo -->
+    <div class="rise rise-d2 relative flex justify-center lg:justify-end">
+      <div class="photo-tilt relative w-64 sm:w-72 aspect-[4/5] rounded-3xl overflow-hidden border-4 border-white/10 shadow-2xl shadow-purple-900/50">
+        <!-- ******************** EDIT: PROFILE PHOTO — replace the src below with your own image file ******************** -->
+        <img src="https://placehold.co/600x750/2e1065/c4b5fd?text=Your+Photo+Here"
+             alt="Profile photo placeholder — replace with your own headshot"
+             class="w-full h-full object-cover" />
+      </div>
+      <!-- floating dock, purely decorative -->
+      <div class="hidden sm:flex absolute -bottom-5 -right-2 glass border border-line rounded-2xl px-4 py-3 items-center gap-3 shadow-lg">
+        <i class="fa-solid fa-table-cells text-accent2 text-sm"></i>
+        <i class="fa-solid fa-layer-group text-accent2 text-sm"></i>
+        <i class="fa-solid fa-code text-accent2 text-sm"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats row -->
+  <div class="max-w-6xl mx-auto mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 relative">
+    <!-- ******************** EDIT: STAT #1 (number + label) ******************** -->
+    <div class="rise flex items-end gap-2">
+      <span class="font-display font-extrabold text-4xl sm:text-5xl text-white">1+</span>
+      <span class="font-display font-medium text-sm text-slate-300 leading-tight pb-1">Year of<br/>Experience</span>
+    </div>
+    <!-- ******************** EDIT: STAT #2 (number + label) ******************** -->
+    <div class="rise rise-d1 flex items-end gap-2">
+      <span class="font-display font-extrabold text-4xl sm:text-5xl text-white">5+</span>
+      <span class="font-display font-medium text-sm text-slate-300 leading-tight pb-1">Flutter<br/>Projects</span>
+    </div>
+    <!-- ******************** EDIT: STAT #3 (number + label) ******************** -->
+    <div class="rise rise-d2 flex items-end gap-2">
+      <span class="font-display font-extrabold text-4xl sm:text-5xl text-white">3+</span>
+      <span class="font-display font-medium text-sm text-slate-300 leading-tight pb-1">Collaborative<br/>Contributions</span>
+    </div>
+    <!-- ******************** EDIT: STAT #4 (number + label) ******************** -->
+    <div class="rise rise-d3 flex items-end gap-2">
+      <span class="font-display font-extrabold text-4xl sm:text-5xl text-white">100%</span>
+      <span class="font-display font-medium text-sm text-slate-300 leading-tight pb-1">Passion for<br/>Development</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="max-w-6xl mx-auto px-5 sm:px-8 py-24 border-t border-line/70">
+  <div class="flex items-center gap-3 mb-10">
+    <span class="font-mono text-accent2 text-sm">01.</span>
+    <h2 class="font-display font-semibold text-2xl sm:text-3xl text-slate-100">About</h2>
+    <span class="flex-1 h-px bg-line"></span>
+  </div>
+
+  <div class="grid md:grid-cols-5 gap-10">
+    <!-- ******************** EDIT: ABOUT PARAGRAPHS ******************** -->
+    <div class="md:col-span-3 space-y-4 text-slate-400 leading-relaxed">
+      <p>
+        I'm a Computer Science student focused on mobile application development, currently
+        building my craft with <span class="text-slate-200">Flutter</span> and
+        <span class="text-slate-200">Dart</span>. During a hands-on internship, I helped build a
+        cross-platform mobile application — working across UI implementation, state management,
+        and Android build configuration.
+      </p>
+      <p>
+        I care about the details that make an app feel fast: clean widget architecture, predictable
+        state with GetX and Provider, and interfaces designed in Figma before a single line of
+        Dart is written.
+      </p>
+      <p>Technologies I've been working with recently:</p>
+      <ul class="grid grid-cols-2 gap-x-4 gap-y-2 font-mono text-sm text-slate-300 pt-1">
+        <li class="flex items-center gap-2"><i class="fa-solid fa-caret-right text-accent2 text-xs"></i>Flutter & Dart</li>
+        <li class="flex items-center gap-2"><i class="fa-solid fa-caret-right text-accent2 text-xs"></i>GetX & Provider</li>
+        <li class="flex items-center gap-2"><i class="fa-solid fa-caret-right text-accent2 text-xs"></i>Firebase</li>
+        <li class="flex items-center gap-2"><i class="fa-solid fa-caret-right text-accent2 text-xs"></i>REST APIs</li>
+        <li class="flex items-center gap-2"><i class="fa-solid fa-caret-right text-accent2 text-xs"></i>Figma / Canva</li>
+        <li class="flex items-center gap-2"><i class="fa-solid fa-caret-right text-accent2 text-xs"></i>HTML / CSS</li>
+      </ul>
+    </div>
+
+    <div class="md:col-span-2 relative">
+      <div class="rounded-2xl border border-line bg-surface p-6 card-hover">
+        <div class="flex items-center justify-between mb-5">
+          <span class="font-mono text-xs text-slate-500">profile.json</span>
+          <i class="fa-solid fa-mobile-screen-button text-accent2"></i>
+        </div>
+        <!-- ******************** EDIT: QUICK-FACTS CARD ******************** -->
+        <dl class="space-y-3 text-sm font-mono">
+          <div class="flex justify-between border-b border-line/70 pb-2">
+            <dt class="text-slate-500">role</dt><dd class="text-slate-200">Flutter Developer</dd>
+          </div>
+          <div class="flex justify-between border-b border-line/70 pb-2">
+            <dt class="text-slate-500">education</dt><dd class="text-slate-200">CS Diploma Student</dd>
+          </div>
+          <div class="flex justify-between border-b border-line/70 pb-2">
+            <dt class="text-slate-500">experience</dt><dd class="text-slate-200">1+ Year</dd>
+          </div>
+          <div class="flex justify-between border-b border-line/70 pb-2">
+            <dt class="text-slate-500">focus</dt><dd class="text-slate-200">Cross-platform Apps</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-slate-500">status</dt>
+            <dd class="text-accent2 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-accent2 animate-pulse"></span>Open to work</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES (numbered list, matches reference style) ============ -->
+<section id="services" class="hero-bg py-24 px-5 sm:px-8 border-t border-line/70">
+  <div class="max-w-5xl mx-auto">
+    <!-- ******************** EDIT: SERVICES SECTION HEADING (includes your name) ******************** -->
+    <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-center mb-4">
+      <span class="text-white">Flutter Development by </span><span class="grad-text">Alex Rivera</span>
+    </h2>
+    <!-- ******************** EDIT: SERVICES SECTION SUBTEXT ******************** -->
+    <p class="text-center text-slate-300/80 max-w-2xl mx-auto mb-14">
+      As a Flutter developer, I specialize in crafting seamless cross-platform applications
+      tailored to project needs, balancing clean functionality with polished visual design.
+    </p>
+
+    <div>
+      <!-- ******************** EDIT: SERVICE ITEM #1 ******************** -->
+      <div class="num-list-item flex items-start gap-6 sm:gap-10 py-8">
+        <span class="font-display font-extrabold text-3xl text-white/90 w-8">01</span>
+        <div class="flex-1">
+          <h3 class="font-display font-semibold text-lg text-white mb-1.5">UI/UX Design</h3>
+          <p class="text-slate-400 text-sm max-w-2xl leading-relaxed">
+            I turn ideas and wireframes into polished, intuitive interfaces — designed first in
+            Figma, then brought to life pixel-by-pixel in Flutter.
+          </p>
+        </div>
+        <i class="fa-solid fa-arrow-up-right text-accent2 mt-1"></i>
+      </div>
+
+      <!-- ******************** EDIT: SERVICE ITEM #2 ******************** -->
+      <div class="num-list-item flex items-start gap-6 sm:gap-10 py-8">
+        <span class="font-display font-extrabold text-3xl text-white/90 w-8">02</span>
+        <div class="flex-1">
+          <h3 class="font-display font-semibold text-lg text-white mb-1.5">App Development</h3>
+          <p class="text-slate-400 text-sm max-w-2xl leading-relaxed">
+            I build cross-platform apps in Flutter with clean architecture, reliable state
+            management, and REST API / Firebase integration.
+          </p>
+        </div>
+        <i class="fa-solid fa-arrow-up-right text-accent2 mt-1"></i>
+      </div>
+
+      <!-- ******************** EDIT: SERVICE ITEM #3 ******************** -->
+      <div class="num-list-item flex items-start gap-6 sm:gap-10 py-8">
+        <span class="font-display font-extrabold text-3xl text-white/90 w-8">03</span>
+        <div class="flex-1">
+          <h3 class="font-display font-semibold text-lg text-white mb-1.5">Build & Optimization</h3>
+          <p class="text-slate-400 text-sm max-w-2xl leading-relaxed">
+            I configure and optimize Android/iOS builds, keeping release size down and
+            performance smooth across devices.
+          </p>
+        </div>
+        <i class="fa-solid fa-arrow-up-right text-accent2 mt-1"></i>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills" class="max-w-6xl mx-auto px-5 sm:px-8 py-24 border-t border-line/70">
+  <div class="flex items-center gap-3 mb-12">
+    <span class="font-mono text-accent2 text-sm">03.</span>
+    <h2 class="font-display font-semibold text-2xl sm:text-3xl text-slate-100">Skills Matrix</h2>
+    <span class="flex-1 h-px bg-line"></span>
+  </div>
+
+  <!-- ******************** EDIT: SKILL CARDS (add/remove items in each <ul>) ******************** -->
+  <div class="grid md:grid-cols-3 gap-6">
+    <div class="rounded-2xl border border-line bg-surface p-6 card-hover">
+      <div class="w-11 h-11 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center mb-5">
+        <i class="fa-solid fa-mobile-screen-button text-accent2"></i>
+      </div>
+      <h3 class="font-display font-semibold text-slate-100 mb-1">Mobile Tech</h3>
+      <p class="text-xs text-slate-500 mb-5">Building & shipping cross-platform apps</p>
+      <ul class="space-y-2.5 text-sm">
+        <li class="flex items-center gap-2"><i class="fa-solid fa-caret-right text-slate-600 text-xs"></i>Flutter</li>
+        <li class="flex items-center gap-2"><i class="fa-solid fa-caret-right text-slate-600 text-xs"></i>Dart</li>
+        <li class="flex items-center gap-2"><i class="fa-solid fa-caret-right text-slate-600 text-xs"></i>GetX</li>
+        <li class="flex items-center gap-2"><i class="fa-solid fa-caret-right text-slate-600 text-xs"></i>Provider</li>
+        <li class="flex items-center gap-2"><i class="fa-solid fa-caret-right text-slate-600 text-xs"></i>Firebase</li>
+      </ul>
+    </div>
+
+    <div class="rounded-2xl border border-line bg-surface p-6 card-hover">
+      <div class="w-11 h-11 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center mb-5">
+        <i class="fa-solid fa-pen-ruler text-accent2"></i>
+      </div>
+      <h3 class="font-display font-semibold text-slate-100 mb-1">UI/UX & Graphics</h3>
+      <p class="text-xs text-slate-500 mb-5">From wireframe to polished screen</p>
+      <ul class="space-y-2.5 text-sm">
+        <li class="flex items-center gap-2"><i class="fa-solid fa-caret-right text-slate-600 text-xs"></i>Figma</li>
+        <li class="flex items-center gap-2"><i class="fa-solid fa-caret-right text-slate-600 text-xs"></i>Canva</li>
+        <li class="flex items-center gap-2"><i class="fa-solid fa-caret-right text-slate-600 text-xs"></i>Responsive Design</li>
+        <li class="flex items-center gap-2"><i class="fa-solid fa-caret-right text-slate-600 text-xs"></i>Design Systems</li>
+        <li class="flex items-center gap-2"><i class="fa-solid fa-caret-right text-slate-600 text-xs"></i>Build Optimization</li>
+      </ul>
+    </div>
+
+    <div class="rounded-2xl border border-line bg-surface p-6 card-hover">
+      <div class="w-11 h-11 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center mb-5">
+        <i class="fa-solid fa-code text-accent2"></i>
+      </div>
+      <h3 class="font-display font-semibold text-slate-100 mb-1">Core CS & Web</h3>
+      <p class="text-xs text-slate-500 mb-5">Foundations behind every build</p>
+      <ul class="space-y-2.5 text-sm">
+        <li class="flex items-center gap-2"><i class="fa-solid fa-caret-right text-slate-600 text-xs"></i>HTML5</li>
+        <li class="flex items-center gap-2"><i class="fa-solid fa-caret-right text-slate-600 text-xs"></i>CSS3</li>
+        <li class="flex items-center gap-2"><i class="fa-solid fa-caret-right text-slate-600 text-xs"></i>JavaScript</li>
+        <li class="flex items-center gap-2"><i class="fa-solid fa-caret-right text-slate-600 text-xs"></i>REST APIs</li>
+        <li class="flex items-center gap-2"><i class="fa-solid fa-caret-right text-slate-600 text-xs"></i>Git</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects" class="max-w-6xl mx-auto px-5 sm:px-8 py-24 border-t border-line/70">
+  <div class="flex items-center gap-3 mb-12">
+    <span class="font-mono text-accent2 text-sm">04.</span>
+    <h2 class="font-display font-semibold text-2xl sm:text-3xl text-slate-100">Featured Projects</h2>
+    <span class="flex-1 h-px bg-line"></span>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-6">
+    <!-- ******************** EDIT: PROJECT CARD #1 (title, description, tags, links) ******************** -->
+    <article class="rounded-2xl border border-line bg-surface p-7 card-hover flex flex-col">
+      <div class="flex items-start justify-between mb-4">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-accent/30 to-accent2/10 border border-accent/30 flex items-center justify-center">
+          <i class="fa-brands fa-youtube text-red-400"></i>
+        </div>
+        <span class="tag px-2.5 py-1 rounded-full border border-line text-slate-400">Mobile App</span>
+      </div>
+      <h3 class="font-display font-semibold text-lg text-slate-100 mb-2">YouTube Clone</h3>
+      <p class="text-sm text-slate-400 leading-relaxed mb-5 flex-1">
+        A Flutter-built video app replicating core YouTube functionality — video playback,
+        content browsing, and REST API data fetching, structured with a clean, testable architecture.
+      </p>
+      <div class="flex flex-wrap gap-2 mb-6">
+        <span class="tag px-2.5 py-1 rounded-md bg-base text-accent2 border border-accent/20">Flutter</span>
+        <span class="tag px-2.5 py-1 rounded-md bg-base text-accent2 border border-accent/20">Dart</span>
+        <span class="tag px-2.5 py-1 rounded-md bg-base text-slate-300 border border-line">REST API</span>
+        <span class="tag px-2.5 py-1 rounded-md bg-base text-slate-300 border border-line">Clean Architecture</span>
+      </div>
+      <div class="flex items-center gap-3 pt-4 border-t border-line/70">
+        <a href="https://github.com/yourusername/youtube-clone" target="_blank" rel="noopener noreferrer"
+           class="flex-1 inline-flex items-center justify-center gap-2 py-2.5 rounded-lg border border-line text-sm text-slate-200 hover:border-accent2/50 hover:text-accent2 transition-colors duration-300">
+          <i class="fa-brands fa-github"></i> Repo
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer"
+           class="flex-1 inline-flex items-center justify-center gap-2 py-2.5 rounded-lg bg-gradient-to-r from-accent to-accent2 text-[#0a0714] text-sm font-semibold hover:-translate-y-0.5 transition-transform duration-300">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo
+        </a>
+      </div>
+    </article>
+
+    <!-- ******************** EDIT: PROJECT CARD #2 (title, description, tags, links) ******************** -->
+    <article class="rounded-2xl border border-line bg-surface p-7 card-hover flex flex-col">
+      <div class="flex items-start justify-between mb-4">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-accent/30 to-accent2/10 border border-accent/30 flex items-center justify-center">
+          <i class="fa-solid fa-database text-accent2"></i>
+        </div>
+        <span class="tag px-2.5 py-1 rounded-full border border-line text-slate-400">Web App</span>
+      </div>
+      <h3 class="font-display font-semibold text-lg text-slate-100 mb-2">Student Management System</h3>
+      <p class="text-sm text-slate-400 leading-relaxed mb-5 flex-1">
+        A web-based database management application for handling student records — create, update,
+        search, and organize student data through a clean, functional interface.
+      </p>
+      <div class="flex flex-wrap gap-2 mb-6">
+        <span class="tag px-2.5 py-1 rounded-md bg-base text-accent2 border border-accent/20">HTML5</span>
+        <span class="tag px-2.5 py-1 rounded-md bg-base text-accent2 border border-accent/20">CSS3</span>
+        <span class="tag px-2.5 py-1 rounded-md bg-base text-slate-300 border border-line">JavaScript</span>
+        <span class="tag px-2.5 py-1 rounded-md bg-base text-slate-300 border border-line">Database</span>
+      </div>
+      <div class="flex items-center gap-3 pt-4 border-t border-line/70">
+        <a href="https://github.com/yourusername/student-management-system" target="_blank" rel="noopener noreferrer"
+           class="flex-1 inline-flex items-center justify-center gap-2 py-2.5 rounded-lg border border-line text-sm text-slate-200 hover:border-accent2/50 hover:text-accent2 transition-colors duration-300">
+          <i class="fa-brands fa-github"></i> Repo
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer"
+           class="flex-1 inline-flex items-center justify-center gap-2 py-2.5 rounded-lg bg-gradient-to-r from-accent to-accent2 text-[#0a0714] text-sm font-semibold hover:-translate-y-0.5 transition-transform duration-300">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo
+        </a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="max-w-6xl mx-auto px-5 sm:px-8 py-24 border-t border-line/70">
+  <div class="flex items-center gap-3 mb-12">
+    <span class="font-mono text-accent2 text-sm">05.</span>
+    <h2 class="font-display font-semibold text-2xl sm:text-3xl text-slate-100">Get In Touch</h2>
+    <span class="flex-1 h-px bg-line"></span>
+  </div>
+
+  <div class="hero-bg rounded-2xl border border-line p-10 sm:p-14 text-center relative overflow-hidden">
+    <p class="font-mono text-accent2 text-xs mb-4">// currently open to internships & junior roles</p>
+    <h3 class="font-display font-bold text-2xl sm:text-3xl text-white max-w-2xl mx-auto mb-4">
+      Have an app idea? Let's build it for mobile — the right way.
+    </h3>
+    <p class="text-slate-300/80 max-w-xl mx-auto mb-8">
+      Whether it's a Flutter build, a UI review, or just a chat about architecture — my inbox is open.
+    </p>
+
+    <!-- ******************** EDIT: EMAIL ADDRESS (appears twice below — link + text) ******************** -->
+    <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
+      <a href="mailto:alex.rivera@example.com"
+         class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-accent to-accent2 text-[#0a0714] font-semibold text-sm hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
+        <i class="fa-solid fa-envelope"></i> alex.rivera@example.com
+      </a>
+    </div>
+
+    <div class="flex items-center justify-center gap-3">
+      <!-- ******************** EDIT: GITHUB LINK (contact section) ******************** -->
+      <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile"
+         class="w-11 h-11 rounded-full border border-line flex items-center justify-center text-slate-400 hover:text-base hover:bg-accent2 hover:border-accent2 hover:-translate-y-1 transition-all duration-300">
+        <i class="fa-brands fa-github"></i>
+      </a>
+      <!-- ******************** EDIT: LINKEDIN LINK (contact section) ******************** -->
+      <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile"
+         class="w-11 h-11 rounded-full border border-line flex items-center justify-center text-slate-400 hover:text-base hover:bg-accent hover:border-accent hover:-translate-y-1 transition-all duration-300">
+        <i class="fa-brands fa-linkedin-in"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="border-t border-line/70 py-8 px-5 sm:px-8">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 font-mono">
+    <!-- ******************** EDIT: FOOTER NAME ******************** -->
+    <p>&copy; <span id="year"></span> Alex Rivera. All rights reserved.</p>
+    <p class="flex items-center gap-1.5">Designed & built with <i class="fa-solid fa-heart text-accent2 text-[10px]"></i> and Flutter-grade attention to detail.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const menuBtn = document.getElementById('menu-btn');
+  const menuClose = document.getElementById('menu-close');
+  const drawer = document.getElementById('mobile-drawer');
+  const backdrop = document.getElementById('drawer-backdrop');
+
+  function openDrawer() {
+    drawer.classList.remove('translate-x-full');
+    backdrop.classList.remove('opacity-0', 'pointer-events-none');
+    menuBtn.setAttribute('aria-expanded', 'true');
+  }
+  function closeDrawer() {
+    drawer.classList.add('translate-x-full');
+    backdrop.classList.add('opacity-0', 'pointer-events-none');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  menuBtn.addEventListener('click', openDrawer);
+  menuClose.addEventListener('click', closeDrawer);
+  backdrop.addEventListener('click', closeDrawer);
+  document.querySelectorAll('[data-nav]').forEach(link => link.addEventListener('click', closeDrawer));
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href');
+      if (targetId.length > 1) {
+        const target = document.querySelector(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
