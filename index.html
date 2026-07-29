@@ -561,17 +561,63 @@
 </section>
 
 <!-- ============ FOOTER ============ -->
+<!-- ============ FOOTER ============ -->
 <footer class="border-t border-line/70 py-8 px-5 sm:px-8">
-  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 font-mono">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-mono">
     <!-- ******************** EDIT: FOOTER NAME ******************** -->
     <p>&copy; <span id="year"></span> Siddi Furqan Maz. All rights reserved.</p>
+    
+    <!-- VISITOR COUNTER BADGE -->
+    <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface border border-line shadow-sm">
+      <i class="fa-regular fa-eye text-accent2"></i>
+      <span>Profile Views: <span id="visitor-count" class="text-slate-200 font-bold ml-1">...</span></span>
+    </div>
+
     <p class="flex items-center gap-1.5">Designed & built with <i class="fa-solid fa-heart text-accent2 text-[10px]"></i> and Flutter-grade attention to detail.</p>
   </div>
 </footer>
 
 <script>
+  // Set current year in footer
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  // ==========================================
+  // ROBUST VISITOR COUNTER LOGIC
+  // ==========================================
+  const namespace = 'siddifurqanmaz-portfolio'; // Unique ID for your website
+  const key = 'page-visits';
+  const countDisplay = document.getElementById('visitor-count');
+  const visitedKey = 'hasVisited_' + namespace;
+
+  async function trackVisitor() {
+    try {
+      // Check if this browser has visited before
+      if (!localStorage.getItem(visitedKey)) {
+        // FIRST TIME VISIT: Call the /up endpoint to increment by 1
+        const res = await fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`);
+        const data = await res.json();
+        countDisplay.textContent = data.count;
+        
+        // Save the "stamp" in the browser so a refresh doesn't increment again
+        localStorage.setItem(visitedKey, 'true');
+      } else {
+        // RETURNING VISITOR (or Page Refresh): Just read the current count
+        const res = await fetch(`https://api.counterapi.dev/v1/${namespace}/${key}`);
+        const data = await res.json();
+        countDisplay.textContent = data.count;
+      }
+    } catch (error) {
+      console.error('Error fetching visitor count:', error);
+      countDisplay.textContent = 'N/A';
+    }
+  }
+
+  // Run the counter tracker immediately on load
+  trackVisitor();
+
+  // ==========================================
+  // MOBILE MENU & SMOOTH SCROLLING LOGIC
+  // ==========================================
   const menuBtn = document.getElementById('menu-btn');
   const menuClose = document.getElementById('menu-close');
   const drawer = document.getElementById('mobile-drawer');
@@ -606,6 +652,5 @@
     });
   });
 </script>
-
 </body>
 </html>
